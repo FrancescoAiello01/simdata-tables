@@ -1,6 +1,10 @@
-# SimData Tables
+# SimData Tables :: Aircraft Performance Calculator
 
 This is the root repository for the SimData.io backend. Everything here is the actual Python functionality in the API. It was chosen to separate this into it's own repository for more maintainability as the project grows.
+
+This repository calculates aircraft takeoff performance using tables extracted from the A320 FCOM (flight crew operations manual).
+
+Originally, this repository was private, but is now public. It is still in the process of major refactoring and some areas of the code may not be clean or clear.
 
 ## Installation
 
@@ -38,4 +42,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 
 ## License
-Proprietary, copyright Francesco Aiello / Aiello Holdings LLC. All rights reserved.
+Copyright Francesco Aiello / Aiello Holdings LLC. All rights reserved.
