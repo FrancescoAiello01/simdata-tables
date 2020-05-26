@@ -3,7 +3,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/FrancescoAiello01/simdata-tables/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/FrancescoAiello01/simdata-tables/test_coverage)
 [![CircleCI](https://circleci.com/gh/FrancescoAiello01/simdata-tables.svg?style=svg)](https://app.circleci.com/pipelines/gh/FrancescoAiello01/simdata-tables)
-[![Coverage Status](https://coveralls.io/repos/github/FrancescoAiello01/simdata-tables/badge.svg?branch=master)](https://coveralls.io/github/FrancescoAiello01/simdata-tables?branch=master)
 
 This is the root repository for the SimData.io backend. Everything here is the actual Python functionality in the API. It was chosen to separate this into it's own repository for more maintainability as the project grows.
 
