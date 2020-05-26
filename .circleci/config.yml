@@ -2,20 +2,17 @@ version: 2.1
 
 orbs:
   python: circleci/python@0.2.1
-  codecov: codecov/codecov@1.0.2
 
 jobs:
   build-and-test:
     executor: python/default
     steps:
-      - codecov/upload:
-          file: { { coverage_report_filepath } }
       - checkout
       - python/load-cache
       - python/install-deps
       - python/save-cache
       - run:
-          command: ./manage.py test
+          command: python -m unittest
           name: Test
 
 workflows:
