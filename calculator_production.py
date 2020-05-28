@@ -5,36 +5,6 @@ from calculator_table_queries import find_best_config
 from calculator_min_v2_check import v2_speed_check_is_ok
 
 # Test input: --air_pressure 990 --airport_elevation 1000 --outside_air_temp 35 --runway_length_uncorrected 2750 --head_wind 10 --slope_percent 1 --aircraft_weight 66 --AP_registration False --air_conditioning False --engine_anti_ice True --total_anti_ice False --operational_CG_percentage 26
-def get_args():
-    parser = argparse.ArgumentParser(description='Airbus A320 Takeoff Performance Calculator. Returns flexible takeoff parameters '
-                                                 'temperature, V1, V2, VR speeds.')
-    parser.add_argument('--air_pressure',
-                        help='air_pressure in hPa')
-    parser.add_argument('--airport_elevation',
-                        help='airport_elevation in feet')
-    parser.add_argument('--outside_air_temp',
-                        help='outside_air_temp in C')
-    parser.add_argument('--runway_length_uncorrected',
-                        help='runway length in feet')
-    parser.add_argument('--head_wind',
-                        help='head_wind')
-    parser.add_argument('--slope_percent',
-                        help='Percentage (uphill is positive, downhill is negative)')
-    parser.add_argument('--aircraft_weight',
-                        help='aircraft_weight (example 66 for 66,000)')
-    parser.add_argument('--AP_registration',
-                        help='Registration is AP-BLY or AP-BLZ')
-    parser.add_argument('--air_conditioning',
-                        help='air_conditioning boolean')
-    parser.add_argument('--engine_anti_ice',
-                        help='engine_anti_ice boolean')
-    parser.add_argument('--total_anti_ice',
-                        help='total_anti_ice boolean')
-    parser.add_argument('--operational_CG_percentage',
-                        help='operational_CG_percentage integer')
-    args = parser.parse_args()  # Parses all command line arguments
-    return args
-
 
 def correct_runway_length(runway_length_uncorrected, slope_percent, head_wind):
     # Corrections for wind and runway slope
@@ -120,11 +90,10 @@ def D_QNH(air_pressure):
     return result
 
 
-def main():
-    args = get_args()
-    if int(args.aircraft_weight) > 78.0:
-        print("Max takeoff weight exceeded (over 78.0).")
-        sys.exit()
+def execute(air_pressure, airport_elevation, outside_air_temp, runway_length_uncorrected, head_wind, slope_percent, aircraft_weight, AP_registration, air_conditioning, engine_anti_ice, total_anti_ice, operational_CG_percentage):
+    if int(aircraft_weight) > 78.0:
+        return "Max takeoff weight exceeded (over 78.0)."
+        
     '''
     First thing to be done: check that the aircraft does not exceed the maximum takeoff weight. If it does, abort
     the entire program and return MTOW violation.
@@ -134,49 +103,49 @@ def main():
     A320-233 variant.
     '''
 
-    args.runway_length = correct_runway_length(int(args.runway_length_uncorrected), float(args.slope_percent),
-                                               int(args.head_wind))
+    runway_length = correct_runway_length(int(runway_length_uncorrected), float(slope_percent),
+                                               int(head_wind))
 
-    best_config_array = find_best_config(int(args.air_pressure), int(args.runway_length), int(args.aircraft_weight))
+    best_config_array = find_best_config(int(air_pressure), int(runway_length), int(aircraft_weight))
     best_config = best_config_array[1]
     best_config_name = best_config_array[0]
 
-    temp_ac = ac_adjustment(args.air_conditioning, args.AP_registration)
+    temp_ac = ac_adjustment(air_conditioning, AP_registration)
 
-    temp_engine_ai = engine_adjustment(args.engine_anti_ice)
-    total_anti_ice_modifier = total_anti_ice_adjustment(args.total_anti_ice)
-    tmax_flex = calculate_tmax_flex(args.AP_registration, int(args.airport_elevation))
+    temp_engine_ai = engine_adjustment(engine_anti_ice)
+    total_anti_ice_modifier = total_anti_ice_adjustment(total_anti_ice)
+    tmax_flex = calculate_tmax_flex(AP_registration, int(airport_elevation))
     flex_temp = flex_temp_adjustment(temp_engine_ai, total_anti_ice_modifier, best_config, temp_ac)
 
-    d_qnh_adjustment = D_QNH(int(args.air_pressure))
+    d_qnh_adjustment = D_QNH(int(air_pressure))
 
     # Configuration Modifications
     flex_temp = flex_temp + d_qnh_adjustment
     best_config[0] = flex_temp
 
-    flex_ok = flex_test(flex_temp, int(args.outside_air_temp))
+    flex_ok = flex_test(flex_temp, int(outside_air_temp))
     if not flex_ok:
-        sys.exit("Flex takeoff not possible.")
+        return "Flex takeoff not possible."
 
     # Final Corrections
-    if float(args.operational_CG_percentage) < 27:
+    if float(operational_CG_percentage) < 27:
         best_config[0] = best_config[0] - 2
         best_config[1] = best_config[1] + 1
         best_config[2] = best_config[2] + 1
         best_config[3] = best_config[3] + 1
 
     # Check that V2 speed is not below the minimum
-    pressure_altitude = (1 - (int(args.air_pressure) / 1013.25) ** 0.190284) * 145366.45  # Formula for pressure altitude
-    if not v2_speed_check_is_ok(best_config[3], pressure_altitude, int(args.aircraft_weight), best_config_name):
-        sys.exit("Flex takeoff not possible. Below minimum V2 speed.")
+    pressure_altitude = (1 - (int(air_pressure) / 1013.25) ** 0.190284) * 145366.45  # Formula for pressure altitude
+    if not v2_speed_check_is_ok(best_config[3], pressure_altitude, int(aircraft_weight), best_config_name):
+        return "Flex takeoff not possible. Below minimum V2 speed."
 
-    # Pretty print the final result:
-    print(best_config_name)
-    print("Flex Temp: {0:g}".format(best_config[0]))
-    print("V1: {0:g}".format(best_config[1]))
-    print("VR: {0:g}".format(best_config[2]))
-    print("V2: {0:g}".format(best_config[3]))
+        
+    return_result = (
+        best_config_name,
+        "Flex Temp: " + str(best_config[0]),
+        "V1: " + str(best_config[1]),
+        "VR: " + str(best_config[2]),
+        "V2: " + str(best_config[3])
+    )
 
-
-if __name__ == "__main__":
-    main()
+    return return_result
