@@ -1,8 +1,8 @@
 import argparse
 import sys
 import numpy as np
-from calculator_table_queries import find_best_config
-from calculator_min_v2_check import v2_speed_check_is_ok
+from .calculator_table_queries import find_best_config
+from .calculator_min_v2_check import v2_speed_check_is_ok
 
 # Test input: --air_pressure 990 --airport_elevation 1000 --outside_air_temp 35 --runway_length_uncorrected 2750 --head_wind 10 --slope_percent 1 --aircraft_weight 66 --AP_registration False --air_conditioning False --engine_anti_ice True --total_anti_ice False --operational_CG_percentage 26
 
