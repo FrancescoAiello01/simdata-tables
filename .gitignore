@@ -102,6 +102,8 @@ celerybeat-schedule
 
 # Environments
 .env
+venv
+.venv
 env/
 ENV/
 env.bak/
@@ -121,3 +123,6 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# test coverage
+.coverage

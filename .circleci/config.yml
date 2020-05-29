@@ -1,22 +1,22 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@0.3.0
+  codecov: codecov/codecov@1.0.2
 
 jobs:
   build-and-test:
-    executor: python/default
+    docker:
+      - image: faiello1999/simdata-tables
     steps:
-      - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
       - run:
-          command: python -m unittest
+          command: python3 -m unittest
           name: test
       - run:
-          command: python main.py
+          command: python3 main.py
           name: build
+      - codecov/upload:
+          file: {{ .coverage }}
+      
 
 workflows:
   main:

@@ -1,0 +1,11 @@
+codecov:
+  branch: master
+coverage:
+  status:
+    patch: false
+    project:
+      default:
+        target: '70'
+        threshold: '0.1'
+        branches: null
+        only_pulls: false
