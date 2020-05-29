@@ -1,15 +1,15 @@
 jobs:
   build:
-    executor: python3/default
+    executor: python/default
     steps:
       - checkout
-      - python3/load-cache
-      - python3/install-deps
-      - python3/save-cache
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
       - run:
           command: |
             # pytest would be a dep in requirements.txt
-            python -m unittest
+            python3 -m unittest
           name: Test
 orbs:
   python: circleci/python@0.1
