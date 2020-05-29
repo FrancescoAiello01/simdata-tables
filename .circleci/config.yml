@@ -1,24 +1,20 @@
-version: 2.1
-
-orbs:
-  codecov: codecov/codecov@1.0.2
-
 jobs:
-  build-and-test:
-    docker:
-      - image: faiello1999/simdata-tables
+  build:
+    executor: python3/default
     steps:
+      - checkout
+      - python3/load-cache
+      - python3/install-deps
+      - python3/save-cache
       - run:
-          command: python3 -m unittest
-          name: test
-      - run:
-          command: python3 main.py
-          name: build
-      - codecov/upload:
-          file: .coverage
-      
-
+          command: |
+            # pytest would be a dep in requirements.txt
+            python -m unittest
+          name: Test
+orbs:
+  python: circleci/python@0.1
+version: 2.1
 workflows:
   main:
     jobs:
-      - build-and-test
+      - build
