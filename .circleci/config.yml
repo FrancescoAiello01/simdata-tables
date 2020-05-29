@@ -15,7 +15,7 @@ jobs:
           command: python3 main.py
           name: build
       - codecov/upload:
-          file: {{ .coverage }}
+          file: .coverage
       
 
 workflows:
