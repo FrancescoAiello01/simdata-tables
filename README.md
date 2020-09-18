@@ -1,5 +1,7 @@
 # SimData Tables :: Aircraft Performance Calculator
 
+[![SimData](https://circleci.com/gh/FrancescoAiello01/simdata-tables.svg?style=svg)](https://app.circleci.com/pipelines/github/FrancescoAiello01/simdata-tables)
+
 Demo: [https://simdata-calculator.herokuapp.com/](https://simdata-calculator.herokuapp.com/)
 
 This is the root repository for the SimData.io backend. Everything here is the actual Python functionality in the API. It was chosen to separate this into it's own repository for more maintainability as the project grows.
