@@ -1,10 +1,6 @@
 # SimData Tables :: Aircraft Performance Calculator
 
 
-[![codecov](https://codecov.io/gh/FrancescoAiello01/simdata-tables/branch/master/graph/badge.svg)](https://codecov.io/gh/FrancescoAiello01/simdata-tables)
-
-[![CircleCI](https://circleci.com/gh/FrancescoAiello01/simdata-tables.svg?style=svg)](https://app.circleci.com/pipelines/gh/FrancescoAiello01/simdata-tables)
-
 This is the root repository for the SimData.io backend. Everything here is the actual Python functionality in the API. It was chosen to separate this into it's own repository for more maintainability as the project grows.
 
 This repository calculates aircraft takeoff performance using tables extracted from the A320 FCOM (flight crew operations manual).
@@ -50,4 +46,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
-Copyright Francesco Aiello / Aiello Holdings LLC. All rights reserved.
+Copyright Francesco Aiello 2020
