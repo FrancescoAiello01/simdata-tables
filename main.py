@@ -8,7 +8,9 @@ api = Api(app)
 
 @app.route('/')
 def home():
-    return 'home'
+    return '''<h1>SimData performance API home</h1>
+            <p>This website calculates aircraft takeoff performance data for the Airbus A320</p>
+            <p>Click <a href="/calculate">here</a> to access the calculator</p>'''
 
 @app.route('/calculate', methods=['GET', 'POST']) #allow both GET and POST requests
 def calculate():
@@ -43,7 +45,7 @@ def calculate():
                   operational_CG_percentage: <input type="text" name="operational_CG_percentage"><br>
                   <input type="submit" value="Submit"><br>
               </form>
-              <p> Test input: </p>
+              <p> Example input: </p>
               <p>air_pressure 990</p><p>airport_elevation 1000</p><p>outside_air_temp 35</p><p>runway_length_uncorrected 2750</p><p>head_wind 10</p><p>slope_percent 1</p><p>aircraft_weight 66</p><p>AP_registration False</p><p>air_conditioning False</p><p>engine_anti_ice True</p><p>total_anti_ice False</p><p>operational_CG_percentage 26 </p>
               '''
 
