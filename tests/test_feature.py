@@ -29,14 +29,6 @@ class FlaskTests(unittest.TestCase):
         # assert the status code of the response
         self.assertEqual(result.status_code, 200)
 
-    def test_home_data(self):
-        # sends HTTP GET request to the application
-        # on the specified path
-        result = self.app.get('/')
-
-        # assert the response data
-        self.assertEqual(result.data, b"home")
-
     def test_calculator(self):
         post_data = {
             'air_pressure': '990',

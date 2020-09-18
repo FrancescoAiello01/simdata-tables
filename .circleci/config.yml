@@ -1,21 +1,11 @@
-version: 2.1
-
-orbs:
-  python: circleci/python@0.2.1
-
+version: 2
 jobs:
   build:
-    executor: python/default
+    docker:
+      - image: circleci/python:3.6.2-stretch-browsers
     steps:
       - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
-      - run:
-          command: gunicorn main:app
-          name: build
-
-workflows:
-  main:
-    jobs:
-      - build
+      - run: python3 -m venv env
+      - run: source ./env/bin/activate 
+      - run: sudo pip3 install -r requirements.txt
+      - run: python -m unittest
