@@ -2,15 +2,24 @@ github:
   prebuilds:
     # enable for the master/default branch (defaults to true)
     master: true
-    # enable for all branches in this repo (defaults to false)
+# enable for all branches in this repo (defaults to false)
     branches: true
-    # enable for pull requests coming from this repo (defaults to true)
+# enable for pull requests coming from this repo (defaults to true)
     pullRequests: true
-    # enable for pull requests coming from forks (defaults to false)
+# enable for pull requests coming from forks (defaults to false)
     pullRequestsFromForks: true
-    # add a "Review in Gitpod" button as a comment to pull requests (defaults to true)
+# add a "Review in Gitpod" button as a comment to pull requests (defaults to true)
     addComment: true
-    # add a "Review in Gitpod" button to pull requests (defaults to false)
+# add a "Review in Gitpod" button to pull requests (defaults to false)
     addBadge: false
-    # add a label once the prebuild is ready to pull requests (defaults to false)
+# add a label once the prebuild is ready to pull requests (defaults to false)
     addLabel: prebuilt-in-gitpod
+
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint@2.1.8:02aHhbJ0Q4aGdjHXlTdVKg==
+    - esbenp.prettier-vscode@5.6.0:o6BL3Pchy5KVBxQAzrFZ2A==
+    - octref.vetur@0.27.0:a+OljFHzmH1YrzbM13sMhQ==
+    - hollowtree.vue-snippets@0.1.12:R8kIKADMUL4rp+KMfYtsHg==
+    - christian-kohler.npm-intellisense@1.2.1:vghMIRDy8/ygZPJWq/9oEQ==
+    - xabikos.JavaScriptSnippets@1.8.0:irMtTLqQntnfBQkmtahtNA==

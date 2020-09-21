@@ -1,10 +1,12 @@
 from flask import Flask
 from flask_restful import Resource, Api
-from flask import request
+from flask import request, jsonify
+from flask_cors import CORS
 from utils import calculator_production
 
 app = Flask(__name__) #create the Flask app
 api = Api(app)
+CORS(app)
 
 @app.route('/')
 def home():
@@ -48,6 +50,11 @@ def calculate():
               <p> Example input: </p>
               <p>air_pressure 990</p><p>airport_elevation 1000</p><p>outside_air_temp 35</p><p>runway_length_uncorrected 2750</p><p>head_wind 10</p><p>slope_percent 1</p><p>aircraft_weight 66</p><p>AP_registration False</p><p>air_conditioning False</p><p>engine_anti_ice True</p><p>total_anti_ice False</p><p>operational_CG_percentage 26 </p>
               '''
+
+# sanity check route
+@app.route('/ping', methods=['GET'])
+def ping_pong():
+    return jsonify('pong!')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000) #run app in debug mode on port 5000
