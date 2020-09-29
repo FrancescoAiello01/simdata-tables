@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Ping from './components/Ping.vue';
+import Home from './components/Home.vue';
+import Calculate from './components/Calculate.vue';
 
 Vue.use(Router);
 
@@ -9,9 +10,14 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/ping',
-      name: 'Ping',
-      component: Ping,
+      path: '/',
+      name: 'Home',
+      component: Home,
+    },
+    {
+      path: '/calculate',
+      name: 'Calculate',
+      component: Calculate,
     },
   ],
 });
